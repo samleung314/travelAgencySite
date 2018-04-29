@@ -1,9 +1,16 @@
+body {
+  background-image: url("/res/background.jpg");
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: rgb(37, 100, 143);
 }
 
 .center {
@@ -15,7 +22,6 @@ ul {
 
 li {
   float: left;
-  border-right: 1px solid #bbb;
 }
 
 .navbar-toggle {
