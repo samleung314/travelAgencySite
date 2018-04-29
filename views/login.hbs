@@ -1,0 +1,20 @@
+<head>
+
+</head>
+<body>
+    <input type="text" id="fName" value="" placeholder="First name"><br>
+    <input type="text" id="lName" value="" placeholder="Last name"><br>
+    <button onclick="myFunction()">Submit</button>    
+    <p id="value1">uh</p>
+    <p id="value2">uh</p>    
+</body>
+
+
+<script>
+function myFunction() {
+    var x = document.getElementById("fName").value;
+    var y = document.getElementById("lName").value;
+    document.getElementById("value1").innerHTML = x;
+    document.getElementById("value2").innerHTML = y;
+}
+</script>
