@@ -2,7 +2,6 @@
 
 </head>
 <body>
-    <form action="actions.php"></form>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
         First Name <br>
         <input type="text" id="fName" value=""><br>
@@ -24,9 +23,11 @@
 
 <script>
 function myFunction() {
-    var x = document.getElementById("fName").value;
-    var y = document.getElementById("lName").value;
-    document.getElementById("lgnBtn").textContent = "Welcome " + x;
+    var first = document.getElementById("fName").value;
+    var last = document.getElementById("lName").value;
+    var age = document.getElementById("age").value;
+    var gender = document.getElementById("gender").value;
+    document.getElementById("lgnBtn").textContent = "Welcome " + first;
     document.getElementById("lgnBtn").style.color = "white";
     document.getElementById("lgnBtn").style.padding = "14px";
 }
