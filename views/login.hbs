@@ -2,9 +2,20 @@
 
 </head>
 <body>
-    <div class = "center">
-        <input type="text" id="fName" value="" placeholder="First name"><br>
-        <input type="text" id="lName" value="" placeholder="Last name"><br>
+    <form action="actions.php"></form>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+        First Name <br>
+        <input type="text" id="fName" value=""><br>
+        Last Name <br>
+        <input type="text" id="lName" value=""> <br>
+        Age <br>
+        <input type="text" id="age" value=""> <br>
+        Gender <br>
+        <select id="gender" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        </select><br>
+        
         <button onclick="myFunction()">Submit</button>    
     </div>
     
