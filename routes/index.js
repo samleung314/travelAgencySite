@@ -10,5 +10,8 @@ router.get('/login.hbs', function(req, res, next) {
   res.render('login', { title: 'My Travel Agency' });
 });
 
+router.get('/reviews.hbs', function(req, res, next) {
+  res.render('reviews', { title: 'My Travel Agency' });
+});
 
 module.exports = router;

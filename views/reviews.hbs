@@ -1,0 +1,30 @@
+<head>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+        Write a Review <br>
+        <textarea style = "resize:none;" rows="5" cols="100" id="review" value=""></textarea> </textarea><br>
+        Rating: <select id="rating" name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select><br>
+        <button onclick="submit()">Submit</button>    
+    </div>
+    
+</body>
+
+
+<script>
+function submit() {
+    var review = document.getElementById("review").value;
+    var rating = document.getElementById("rating").value;
+    document.getElementById("lgnBtn").textContent = rating + ": "+ review ;
+    document.getElementById("lgnBtn").style.color = "white";
+    document.getElementById("lgnBtn").style.padding = "14px";
+}
+</script>
