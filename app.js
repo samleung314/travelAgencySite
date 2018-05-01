@@ -45,15 +45,14 @@ app.listen(80, () => console.log('Travel Agency listening on port 80!'))
 
 module.exports = app;
 
-
 //Database
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "xnonx14",
-  password: "abcde12345"
+  host: "54.165.71.152",
+  user: "admin",
+  password: "password"
 });
 
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected To Database!");
+  console.log("Connected To Remote Database!");
 });
