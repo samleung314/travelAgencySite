@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -43,3 +44,16 @@ app.use(function(err, req, res, next) {
 app.listen(80, () => console.log('Travel Agency listening on port 80!'))
 
 module.exports = app;
+
+
+//Database
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "xnonx14",
+  password: "abcde12345"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected To Database!");
+});
