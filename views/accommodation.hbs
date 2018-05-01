@@ -3,27 +3,36 @@
 </head>
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-        <br>City<br>
-        <input type ="text" id = "city">
-        <br>Number of guests<br>
-        <input type ="text" id = "num">
-        <br>Check-in<br>
-        <input type ="text" id = "indate">
-        <br>Check-out<br>
-        <input type ="text" id = "outdate">
+        City <input type ="text" id = "city">
+        <br>Number of guests <input type ="text" id = "num">
+        <br>Accommodation type <select id="type">
+        <option value="hotel">Hotel</option>
+        <option value="motel">Motel</option>
+        </select>
+        <br>Facilities: &emsp;
+        <input type="checkbox" name="lounge" value="lounge">Lounge &ensp;
+        <input type="checkbox" name="gym" value="gym">Gym &ensp;
+        <input type="checkbox" name="pool" value="pool">Pool &ensp;
+        <br>Check-in date <input type ="text" id = "indate">
+        <br>Check-out date <input type ="text" id = "outdate">
         <br>
         <button onclick="submit()">Submit</button>
     </div>
 
 </body>
 
+<form>
+  autocomplete="off"
+</form>
+
 <script>
 function submit() {
     var city = document.getElementById("city").value;
     var num = document.getElementById("num").value;
+    var type = document.getElementById("type").value;
     var indate = document.getElementById("indate").value;
     var outdate = document.getElementById("outdate").value;
-    document.getElementById("lgnBtn").textContent = city + num + indate + outdate;
+    document.getElementById("lgnBtn").textContent = city + num + type + indate + outdate;
     document.getElementById("lgnBtn").style.color = "white";
     document.getElementById("lgnBtn").style.padding = "14px";
 }
