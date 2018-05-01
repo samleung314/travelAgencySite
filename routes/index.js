@@ -18,5 +18,20 @@ router.get('/balance.hbs', function(req, res, next) {
   res.render('balance', { title: 'My Travel Agency' });
 });
 
+router.get('/flight.hbs', function(req, res, next) {
+  res.render('flight', { title: 'My Travel Agency' });
+});
+
+router.get('/carrental.hbs', function(req, res, next) {
+  res.render('carrental', { title: 'My Travel Agency' });
+});
+
+router.get('/cruise.hbs', function(req, res, next) {
+  res.render('cruise', { title: 'My Travel Agency' });
+});
+
+router.get('/accommodation.hbs', function(req, res, next) {
+  res.render('accommodation', { title: 'My Travel Agency' });
+});
 
 module.exports = router;
