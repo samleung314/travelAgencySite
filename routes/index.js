@@ -18,6 +18,10 @@ router.get('/balance.hbs', function(req, res, next) {
   res.render('balance', { title: 'My Travel Agency' });
 });
 
+router.get('/group.hbs', function(req, res, next) {
+  res.render('balance', { title: 'My Travel Agency' });
+});
+
 router.get('/flight.hbs', function(req, res, next) {
   res.render('flight', { title: 'My Travel Agency' });
 });
