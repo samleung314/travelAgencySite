@@ -1,0 +1,30 @@
+<head>
+
+</head>
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+        <br>City<br>
+        <input type ="text" id = "city">
+        <br>Number of guests<br>
+        <input type ="text" id = "num">
+        <br>Check-in<br>
+        <input type ="text" id = "indate">
+        <br>Check-out<br>
+        <input type ="text" id = "outdate">
+        <br>
+        <button onclick="submit()">Submit</button>
+    </div>
+
+</body>
+
+<script>
+function submit() {
+    var city = document.getElementById("city").value;
+    var num = document.getElementById("num").value;
+    var indate = document.getElementById("indate").value;
+    var outdate = document.getElementById("outdate").value;
+    document.getElementById("lgnBtn").textContent = city + num + indate + outdate;
+    document.getElementById("lgnBtn").style.color = "white";
+    document.getElementById("lgnBtn").style.padding = "14px";
+}
+</script>

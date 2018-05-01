@@ -1,0 +1,38 @@
+<head>
+
+</head>
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+        <br>Departure city<br>
+        <input type ="text" id = "departure">
+        <br>Destination city<br>
+        <input type ="text" id = "destination">
+        <br>Number of passengers<br>
+        <input type ="text" id = "num">
+        <br>Class<br>
+        <select id="class">
+        <option value="econ">Economy</option>
+        <option value="premium">Premium Economy</option>
+        <option value="business">Business</option>
+        <option value="first">First</option>
+        </select>  
+        <br>Date of departure<br>
+        <input type ="text" id = "date">
+        <br>
+        <button onclick="submit()">Submit</button>
+    </div>
+
+</body>
+
+<script>
+function submit() {
+    var dep = document.getElementById("departure").value;
+    var dst = document.getElementById("destination").value;
+    var num = document.getElementById("num").value;
+    var section = document.getElementById("class").value;
+    var date = document.getElementById("date").value;
+    document.getElementById("lgnBtn").textContent = dep + dst + num + section + date;
+    document.getElementById("lgnBtn").style.color = "white";
+    document.getElementById("lgnBtn").style.padding = "14px";
+}
+</script>
