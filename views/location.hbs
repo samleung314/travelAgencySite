@@ -1,0 +1,27 @@
+<!-- for database admin to add a location -->
+<head>
+
+</head>
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+        FOR ADMIN USE
+        <br>
+        ID Number <input type ="text" id = "id">
+        <br>City <input type ="text" id = "city">
+        <br>State <input type ="text" id = "state">
+        <br>Country <input type ="text" id = "country">
+        <br><button onclick="submit()">Submit</button>
+    </div>
+</body>
+
+<script>
+function submit() {
+    var id = document.getElementById("id").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    var country = document.getElementById("country").value;
+    document.getElementById("lgnBtn").textContent = id + city + state + country;
+    document.getElementById("lgnBtn").style.color = "white";
+    document.getElementById("lgnBtn").style.padding = "14px";
+}
+</script>
