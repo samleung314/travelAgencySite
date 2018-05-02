@@ -14,10 +14,17 @@ var con = mysql.createConnection({
 /* GET home page. */
 router.post('/register', function(req, res, next) {
     var p= req.body;
-    var values = "(0,'"+p.firstname+"', '"+p.lastname+"', "+ p.age +", '"+p.gender+"', '"+p.pass+"')";
-    var sql = "INSERT INTO passenger (groupID, fName, lName, age, gender,pass) VALUES"+values;
+    var entity = [];
+    entity.push(0);
+    entity.push(p.fname);
+    entity.push(p.lname);
+    entity.push(p.age);
+    entity.push(p.gender);
+    entity.push(p.pass);
+    var values = [entity];
+    var sql = "INSERT INTO passenger (groupID, fName, lName, age, gender,pass) VALUES ?";
     
-    con.query(sql, function (err, result) {
+    con.query(sql,[values],function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
     });
