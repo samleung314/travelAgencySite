@@ -3,10 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//var mysql = require('mysql');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var databaseRouter = require('./routes/database');
 
 var app = express();
 
@@ -23,6 +24,8 @@ app.use("/res", express.static(__dirname + '/res'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/database', databaseRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,14 +48,3 @@ app.listen(80, () => console.log('Travel Agency listening on port 80!'))
 
 module.exports = app;
 
-//Database
-var con = mysql.createConnection({
-  host: "54.165.71.152",
-  user: "admin",
-  password: "password"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected To Remote Database!");
-});
