@@ -3,8 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'My Travel Agency' });
+  res.render('login', { title: 'My Travel Agency' });
 });
+
 
 router.get('/login.hbs', function(req, res, next) {
   res.render('login', { title: 'Login' });
@@ -23,7 +24,7 @@ router.get('/balance.hbs', function(req, res, next) {
 });
 
 router.get('/group.hbs', function(req, res, next) {
-  res.render('balance', { title: 'My Travel Agency' });
+  res.render('group', { title: 'My Travel Agency' });
 });
 
 router.get('/flight.hbs', function(req, res, next) {

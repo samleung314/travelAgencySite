@@ -18,7 +18,11 @@ router.post('/register', function(req, res, next) {
     entity.push(0);
     entity.push(p.fname);
     entity.push(p.lname);
-    entity.push(p.age);
+    if(Number.isInteger(p.age)){
+        entity.push(p.age);
+    }else{
+        entity.push(null);
+    }
     entity.push(p.gender);
     entity.push(p.pass);
     var values = [entity];
@@ -32,21 +36,23 @@ router.post('/register', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    /*
+    
     var p= req.body;
-    console.log(p.pid);
-    console.log(p.pass);
-    "SELECT name, address"
-    "FROM customers"
-    "WHERE password = "+p.pass
-    var sql = "";
+    var sql = "SELECT passengerID FROM TravelAgency.passenger WHERE pass = 'thisisabadpass'";
     
     con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
+        if (err){
+            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials'});
+        } 
+        console.log(result.length);
+        if(result[0].passengerID == p.pid){
+            res.render('group', { title: 'My Travel Agency'});
+        }else{
+            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials'});
+        }
     });
-    */
-    res.render('login', { title: 'My Travel Agency' });
+    
+    
 });
 
 con.connect(function(err) {
