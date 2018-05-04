@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login.hbs', function(req, res, next) {
-  res.render('login', { title: 'My Travel Agency' });
+  res.render('login', { title: 'Login' });
+});
+
+router.get('/register.hbs', function(req, res, next) {
+  res.render('register', { title: 'Register' });
 });
 
 router.get('/reviews.hbs', function(req, res, next) {

@@ -1,0 +1,36 @@
+<head>
+</head>
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2;">
+        <form action = "/database/register" method = "post">
+            <table align="center">
+                <tr>
+                    <td align="right">First Name</td>
+                    <td align="left"><input type="text" name = "fname" value=""><br></td>
+                </tr>
+                <tr>
+                    <td align="right">Last Name</td>
+                    <td align="left"> <input type="text" name = "lname" value=""></td>
+                </tr>
+                <tr>
+                    <td align="right">Age</td>
+                    <td align="left"> <input type="text" name = "age" value=""> </td>
+                </tr>
+                <tr>
+                    <td align="right">Gender</td>
+                    <td align="left">
+                        <select id="gender" name="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Password</td>
+                    <td align="left"> <input type="text" id="pass" name = "pass" value=""> </td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
