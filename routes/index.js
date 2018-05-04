@@ -48,6 +48,6 @@ router.get('/employee.hbs', function(req, res, next) {
 
 router.get('/location.hbs', function(req, res, next) {
   res.render('location', { title: 'My Travel Agency' });
-});1
+});
 
 module.exports = router;
