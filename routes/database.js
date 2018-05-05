@@ -2,6 +2,19 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
+function getLevel(req){
+    var sql = "INSERT INTO Passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
+    
+    con.query(sql,[values],function (err, result) {
+        if (err){
+            res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser"});
+        }else{
+            res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser"});
+        }
+        
+    });
+}
+
 //Database
 var con = mysql.createConnection({
     host: "54.165.71.152",
@@ -16,7 +29,7 @@ router.post('/register', function(req, res, next) {
     var p= req.body;
     var entity = [];
     entity.push(p.email);
-    entity.push(0);
+    entity.push(null);
     entity.push(p.fname);
     entity.push(p.lname);
     if(Number.isInteger(p.age)){
@@ -27,7 +40,7 @@ router.post('/register', function(req, res, next) {
     entity.push(p.gender);
     entity.push(p.pass);
     var values = [entity];
-    var sql = "INSERT INTO passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
+    var sql = "INSERT INTO Passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
     
     con.query(sql,[values],function (err, result) {
         if (err){
@@ -42,12 +55,12 @@ router.post('/register', function(req, res, next) {
 router.post('/login', function(req, res, next) {
     
     var p= req.body;
-    var sql = "SELECT pass,fName FROM TravelAgency.passenger WHERE email = '"+p.email +"'";
-    
+    var sql = "SELECT pass,fName FROM TravelAgency.Passenger WHERE email = '"+p.email +"'";
     con.query(sql, function (err, result) {
         if(result.length == 1 && result[0].pass == p.pass){
             res.cookie('name',result[0].fName);
             res.cookie('email',p.email);
+            console.log("Logged In: "+p.email);
             res.redirect('/')
         }else{
             res.render('login', { title: 'My Travel Agency', logged: "Login",message: 'Invalid Credentials', layout: "nonuser"});
@@ -63,4 +76,4 @@ con.connect(function(err) {
 
   });
 
-module.exports = router;
+module.exports = {router,con};

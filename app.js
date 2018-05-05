@@ -25,7 +25,7 @@ app.use("/res", express.static(__dirname + '/res'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/database', databaseRouter);
+app.use('/database', databaseRouter.router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
