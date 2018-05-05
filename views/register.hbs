@@ -2,8 +2,13 @@
 </head>
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2;">
+        {{message}}
         <form action = "/database/register" method = "post">
             <table align="center">
+                <tr>
+                    <td align="right">Email</td>
+                    <td align="left"> <input type="text" name = "email" value=""> </td>
+                </tr>
                 <tr>
                     <td align="right">First Name</td>
                     <td align="left"><input type="text" name = "fname" value=""><br></td>

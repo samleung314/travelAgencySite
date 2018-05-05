@@ -1,54 +1,89 @@
 var express = require('express');
 var router = express.Router();
 
+logValue = "Login";
+loggedIn = false;
+function setLogged(req){
+  if(req.cookies.name == "" && req.cookies.email == ""){
+    logValue = "Login"
+    loggedIn = false;
+  }else{
+    logValue = "Logout"
+    loggedIn = true;
+  }
+}
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'My Travel Agency' });
+  setLogged(req);
+  if(!loggedIn){ //if you are logged out
+    res.render('homepage', {title: "Travel Agency", logged: logValue, message: "new user. Please Login!"})
+  }else{
+    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
+  }
 });
 
 
 router.get('/login.hbs', function(req, res, next) {
-  res.render('login', { title: 'Login' });
+  if(!loggedIn){  //if you are logged out
+    res.render('login', { title: 'My Travel Agency', logged: "Login" });
+  }else{ //if you are logged in
+    res.cookie('name', "")
+    res.cookie('email', "")
+    res.render('login', { title: 'My Travel Agency', logged: "Login" });
+  }
 });
 
 router.get('/register.hbs', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+  setLogged(req);
+  res.render('register', { title: 'Register', logged: logValue });
 });
 
 router.get('/reviews.hbs', function(req, res, next) {
-  res.render('reviews', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('reviews', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/balance.hbs', function(req, res, next) {
-  res.render('balance', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('balance', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/group.hbs', function(req, res, next) {
-  res.render('group', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('group', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/flight.hbs', function(req, res, next) {
-  res.render('flight', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('flight', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/carrental.hbs', function(req, res, next) {
-  res.render('carrental', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('carrental', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/cruise.hbs', function(req, res, next) {
-  res.render('cruise', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('cruise', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/accommodation.hbs', function(req, res, next) {
-  res.render('accommodation', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('accommodation', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/employee.hbs', function(req, res, next) {
-  res.render('employee', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('employee', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/location.hbs', function(req, res, next) {
-  res.render('location', { title: 'My Travel Agency' });
+  setLogged(req);
+  res.render('location', { title: 'My Travel Agency', logged: logValue });
 });
 
 module.exports = router;

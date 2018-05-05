@@ -15,6 +15,7 @@ var con = mysql.createConnection({
 router.post('/register', function(req, res, next) {
     var p= req.body;
     var entity = [];
+    entity.push(p.email);
     entity.push(0);
     entity.push(p.fname);
     entity.push(p.lname);
@@ -26,29 +27,37 @@ router.post('/register', function(req, res, next) {
     entity.push(p.gender);
     entity.push(p.pass);
     var values = [entity];
-    var sql = "INSERT INTO passenger (groupID, fName, lName, age, gender,pass) VALUES ?";
+    var sql = "INSERT INTO passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
     
     con.query(sql,[values],function (err, result) {
-        if (err) throw err;
-        console.log("1 record inserted");
+        if (err){
+            res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage});
+        }else{
+            res.render('login', { title: 'My Travel Agency', logged: "Login"});
+        }
+        
     });
-    res.render('login', { title: 'My Travel Agency' });
 });
 
 router.post('/login', function(req, res, next) {
     
     var p= req.body;
-    var sql = "SELECT passengerID FROM TravelAgency.passenger WHERE pass = 'thisisabadpass'";
+    var sql = "SELECT pass,fName FROM TravelAgency.passenger WHERE email = '"+p.email +"'";
     
     con.query(sql, function (err, result) {
         if (err){
-            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials'});
+            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials', logged: "Login"});
         } 
-        console.log(result.length);
-        if(result[0].passengerID == p.pid){
-            res.render('group', { title: 'My Travel Agency'});
+        if(result.length == 1){
+            if(result[0].pass == p.pass){
+                res.cookie('name',result[0].fName);
+                res.cookie('email',p.email);
+                res.redirect('/')
+            }else{
+                res.render('login', { title: 'My Travel Agency', logged: "Login",message: 'Invalid Credentials'});
+            }
         }else{
-            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials'});
+            res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials'});
         }
     });
     
