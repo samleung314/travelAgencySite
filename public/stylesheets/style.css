@@ -13,6 +13,14 @@ ul {
   background-color: rgb(37, 100, 143);
 }
 
+.loggedout{
+  visibility: hidden;
+}
+
+.loggedin{
+  visibility: visible;
+}
+
 .center {
     margin: auto;
     width: 60%;

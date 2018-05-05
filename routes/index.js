@@ -19,26 +19,30 @@ function setLogged(req){
 router.get('/', function(req, res, next) {
   setLogged(req);
   if(!loggedIn){ //if you are logged out
-    res.render('homepage', {title: "Travel Agency", logged: logValue, message: "new user. Please Login!"})
+    res.render('homepage', {title: "Travel Agency", logged: logValue, message: "new user. Please Login!", layout: "nonuser"})
   }else{
-    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
+    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.email})
   }
 });
 
 
 router.get('/login.hbs', function(req, res, next) {
-  if(!loggedIn){  //if you are logged out
-    res.render('login', { title: 'My Travel Agency', logged: "Login" });
-  }else{ //if you are logged in
+  if(!loggedIn){  
+    //if you are logged out
+    //login
+    res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
+  }else{ 
+    //if you are logged in
+    //logout
     res.cookie('name', "")
     res.cookie('email', "")
-    res.render('login', { title: 'My Travel Agency', logged: "Login" });
+    res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser"});
   }
 });
 
 router.get('/register.hbs', function(req, res, next) {
   setLogged(req);
-  res.render('register', { title: 'Register', logged: logValue });
+  res.render('register', { title: 'Register', logged: logValue, layout: "nonuser" });
 });
 
 router.get('/reviews.hbs', function(req, res, next) {

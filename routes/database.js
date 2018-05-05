@@ -31,9 +31,9 @@ router.post('/register', function(req, res, next) {
     
     con.query(sql,[values],function (err, result) {
         if (err){
-            res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage});
+            res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser"});
         }else{
-            res.render('login', { title: 'My Travel Agency', logged: "Login"});
+            res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser"});
         }
         
     });
@@ -45,19 +45,12 @@ router.post('/login', function(req, res, next) {
     var sql = "SELECT pass,fName FROM TravelAgency.passenger WHERE email = '"+p.email +"'";
     
     con.query(sql, function (err, result) {
-        if (err){
-            res.render('login', { title: 'My Travel Agency', message: 'Invalid Credentials', logged: "Login"});
-        } 
-        if(result.length == 1){
-            if(result[0].pass == p.pass){
-                res.cookie('name',result[0].fName);
-                res.cookie('email',p.email);
-                res.redirect('/')
-            }else{
-                res.render('login', { title: 'My Travel Agency', logged: "Login",message: 'Invalid Credentials'});
-            }
+        if(result.length == 1 && result[0].pass == p.pass){
+            res.cookie('name',result[0].fName);
+            res.cookie('email',p.email);
+            res.redirect('/')
         }else{
-            res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials'});
+            res.render('login', { title: 'My Travel Agency', logged: "Login",message: 'Invalid Credentials', layout: "nonuser"});
         }
     });
     
