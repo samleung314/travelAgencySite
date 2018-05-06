@@ -28,11 +28,11 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/login.hbs', function(req, res, next) {
-  if(!loggedIn){  
+  if(!loggedIn){
     //if you are logged out
     //login
     res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
-  }else{ 
+  }else{
     //if you are logged in
     //logout
     res.cookie('name', "")

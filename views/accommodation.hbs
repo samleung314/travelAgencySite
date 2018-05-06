@@ -4,7 +4,7 @@
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
         City <input type ="text" id = "city">
-        <br>Number of guests <input type ="text" id = "num">
+        <br>Number of rooms <input type ="text" id = "num">
         <br>Accommodation type <select id="type">
         <option value="hotel">Hotel</option>
         <option value="motel">Motel</option>
@@ -24,16 +24,3 @@
 <form>
   autocomplete="off"
 </form>
-
-<script>
-function submit() {
-    var city = document.getElementById("city").value;
-    var num = document.getElementById("num").value;
-    var type = document.getElementById("type").value;
-    var indate = document.getElementById("indate").value;
-    var outdate = document.getElementById("outdate").value;
-    document.getElementById("lgnBtn").textContent = city + num + type + indate + outdate;
-    document.getElementById("lgnBtn").style.color = "white";
-    document.getElementById("lgnBtn").style.padding = "14px";
-}
-</script>

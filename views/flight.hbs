@@ -3,31 +3,48 @@
 </head>
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-        Departure city <input type ="text" id = "departure">
-        <br>Destination city <input type ="text" id = "destination">
-        <br>Number of passengers <input type ="text" id = "num">
-        <br>Class <select id="class">
-        <option value="econ">Economy</option>
-        <option value="premium">Premium Economy</option>
-        <option value="business">Business</option>
-        <option value="first">First</option>
-        </select>
-        <br>Date of departure <input type ="text" id = "date">
-        <br>
-        <button onclick="submit()">Submit</button>
+      <form action = "/database/flight" method = "post">
+          <table align="center">
+              <tr>
+              <td align="right">Departure city</td>
+              <td align="left"><input type="text" name="departure" /></td>
+              </tr>
+              <tr>
+              <td align="right">Destination city</td>
+              <td align="left"><input type="text" name="destination" /></td>
+              </tr>
+              <tr>
+              <td align="right">Number of passengers</td>
+              <td align="left"><input type="text" name="num" /></td>
+              </tr>
+              <tr>
+              <td align="right">Class</td>
+              <td align="left"><select id ="section" name="section">
+              <option value="economy">Economy</option>
+              <option value="premium economy">Premium Economy</option>
+              <option value="business">Business</option>
+              <option value="first">First</option>
+              </select></td>
+              </tr>
+              <tr>
+              <td align="right">Month of departure</td>
+              <td align="left"><select id ="date" name="date">
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+              </select></td>
+              </tr>
+          </table>
+          <input type="submit" value="Search for flights">
+      </form>
     </div>
-
 </body>
-
-<script>
-function submit() {
-    var dep = document.getElementById("departure").value;
-    var dst = document.getElementById("destination").value;
-    var num = document.getElementById("num").value;
-    var section = document.getElementById("class").value;
-    var date = document.getElementById("date").value;
-    document.getElementById("lgnBtn").textContent = dep + dst + num + section + date;
-    document.getElementById("lgnBtn").style.color = "white";
-    document.getElementById("lgnBtn").style.padding = "14px";
-}
-</script>
