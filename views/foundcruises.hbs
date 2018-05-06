@@ -1,0 +1,34 @@
+<head>
+
+</head>
+
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+      {{#if message}}
+        {{message}}
+        <form action="/" method="get">
+          <input type="submit" value="Back to home page"><br>
+        </form>
+      {{else}}
+        {{#if cruises}}
+          <h4>{{cruises.length}} {{arrive}} cruise(s) from {{depart}} with cabins for {{num}} passengers available:</h4>
+            <form action="/database/bookcruise" method="post">
+              <table align="center">
+                {{#each cruises}}
+                  <tr>
+                    <td align="right">{{this.Carrier}} {{this.CruiseNumber}} sailing {{this.Departure}}: ${{this.Fare}}/person.</td>
+                    <td align="left"><button name= "book" type="submit" value={{this.CruiseNumber}}>Book tickets</button></td>
+                  </tr>
+                {{/each}}
+                <input type="hidden" name="ticketsBooked" value={{num}}>
+              </table>
+            </form>
+        {{else}}
+          No cruises available.<br>
+        {{/if}}
+        <form action="/cruise.hbs" method="get">
+          <input type="submit" value="Back to cruise search"><br>
+        </form>
+      {{/if}}
+    </div>
+</body>

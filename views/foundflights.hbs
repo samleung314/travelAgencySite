@@ -1,0 +1,35 @@
+<head>
+
+</head>
+
+<body>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+      {{#if message}}
+        {{message}}
+        <form action="/" method="get">
+          <input type="submit" value="Back to home page"><br>
+        </form>
+      {{else}}
+        {{#if flights}}
+          <h4>{{flights.length}} flight(s) from {{depart}} to {{arrive}} with {{num}} {{section}} class seats available:</h4>
+            <form action="/database/bookflight" method="post">
+              <table align="center">
+                {{#each flights}}
+                  <tr>
+                    <td align="right">{{this.Carrier}} Flight {{this.FlightNumber}} on {{this.Departure}}: ${{this.Fare}}/person.</td>
+                    <td align="left"><button name= "book" type="submit" value={{this.FlightNumber}}>Book tickets</button></td>
+                  </tr>
+                {{/each}}
+                <input type="hidden" name="ticketsBooked" value={{num}}>
+                <input type="hidden" name="section" value={{section}}>
+              </table>
+            </form>
+        {{else}}
+          No flights available.<br>
+        {{/if}}
+        <form action="/flight.hbs" method="get">
+          <input type="submit" value="Back to flight search"><br>
+        </form>
+      {{/if}}
+    </div>
+</body>

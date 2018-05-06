@@ -91,4 +91,9 @@ router.get('/location.hbs', function(req, res, next) {
   res.render('location', { title: 'My Travel Agency', logged: logValue });
 });
 
+router.get('/foundflights.hbs', function(req, res, next) {
+  setLogged(req);
+  res.render('foundflights', { title: 'My Travel Agency', logged: logValue });
+});
+
 module.exports = router;

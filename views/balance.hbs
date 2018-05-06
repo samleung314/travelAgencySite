@@ -3,29 +3,18 @@
 </head>
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-        Payment Type<br> 
+        Payment Type<br>
         <select id="type">
         <option value="debit">Debit</option>
         <option value="credit">Credit</option>
         <option value="PayPal">PayPal</option>
-        </select>  
+        </select>
         <br>Card Number<br>
         <input type ="text" id = "num">
         <br>Card Expiry Date <br>
         <input type ="text" id = "expiry">
         <br>
-        <button onclick="submit()">Submit</button> 
+        <button onclick="submit()">Submit</button>
     </div>
-    
-</body>
 
-<script>
-function submit() {
-    var type = document.getElementById("type").value;
-    var number = document.getElementById("num").value;
-    var expiry = document.getElementById("expiry").value;
-    document.getElementById("lgnBtn").textContent = type + number + expiry;
-    document.getElementById("lgnBtn").style.color = "white";
-    document.getElementById("lgnBtn").style.padding = "14px";
-}
-</script>
+</body>

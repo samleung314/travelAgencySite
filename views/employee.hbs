@@ -14,16 +14,3 @@
         <br><button onclick="submit()">Submit</button>
     </div>
 </body>
-
-<script>
-function submit() {
-    var id = document.getElementById("id").value;
-    var name = document.getElementById("name").value;
-    var role = document.getElementById("role").value;
-    var supervisor = document.getElementById("supervisor").value;
-    var group = document.getElementById("group").value;
-    document.getElementById("lgnBtn").textContent = id + name + role + supervisor + group;
-    document.getElementById("lgnBtn").style.color = "white";
-    document.getElementById("lgnBtn").style.padding = "14px";
-}
-</script>
