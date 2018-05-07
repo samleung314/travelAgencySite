@@ -96,7 +96,7 @@ router.post('/cruise', function(req, res, next) {
 });
 
 router.post('/accommodation', function(req, res, next) {
-  var p= req.body;
+  var p = req.body;
   var amen = [];
   if(p.lounge == 1){
     amen.push("Lounge");
