@@ -138,6 +138,7 @@ router.post('/bookcruise', function(req, res, next) {
     });
 });
 
+<<<<<<< HEAD
 router.post('/bookroom', function(req, res, next) {
     var p= req.body;
     var sql = "";
@@ -145,6 +146,14 @@ router.post('/bookroom', function(req, res, next) {
     con.query(sql, function (err, result) {
       //res.render('foundrooms', {title: 'My Travel Agency', message: "Your rooms has been booked!"});
     });
+=======
+router.post('/addPassenger', function(req, res, next) {
+    
+});
+
+router.post('/updateGroup', function(req, res, next) {
+    
+>>>>>>> d63479cd4e47efae7651cdc5322806673884451c
 });
 
 con.connect(function(err) {
