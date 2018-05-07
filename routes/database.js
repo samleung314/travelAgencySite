@@ -23,7 +23,6 @@ var con = mysql.createConnection({
   database: "TravelAgency",
 });
 
-
 /* GET home page. */
 router.post('/register', function(req, res, next) {
   var p= req.body;

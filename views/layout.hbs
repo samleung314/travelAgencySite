@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/accommodation.hbs">Accommodation</a></li>
-      <li><a href="/flight.hbs">Flights</a></li>
-      <li><a href="/cruise.hbs">Cruises</a></li>
-      <li><a href="/carrental.hbs">Car Rental</a></li>
-      <li><a href="/balance.hbs">Card</a></li>
-      <li id="lgnBtn" style = "float:right"><a href="/login.hbs">{{logged}}</a></li>
-      <li class=loggedout style = "float:right"><a href="/reviews.hbs">Reviews</a></li>
-    </ul>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>  
-    {{{body}}}
-  </body>
+
+<head>
+  <title>{{title}}</title>
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/accommodation.hbs">Accommodation</a>
+    </li>
+    <li>
+      <a href="/flight.hbs">Flights</a>
+    </li>
+    <li>
+      <a href="/cruise.hbs">Cruises</a>
+    </li>
+    <li>
+      <a href="/carrental.hbs">Car Rental</a>
+    </li>
+    <li>
+      <a href="/balance.hbs">Card</a>
+    </li>
+    <li>
+      <a href="/reviews.hbs">Write a Review</a>
+    </li>
+    <li id="lgnBtn" style="float:right">
+      <a href="/login.hbs">{{logged}}</a>
+    </li>
+    <li class=loggedout style="float:right">
+      <a href="/reviews.hbs">Reviews</a>
+    </li>
+  </ul>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  {{{body}}}
+</body>
+
 </html>

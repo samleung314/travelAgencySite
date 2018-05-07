@@ -1,27 +1,40 @@
 <!-- for database admin to add a location -->
-<head>
 
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+    <div class="center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
         FOR ADMIN USE
+        <br> ID Number
+        <input type="text" id="id">
+        <br>City
+        <input type="text" id="city">
+        <br>State
+        <input type="text" id="state">
+        <br>Country
+        <input type="text" id="country">
         <br>
-        ID Number <input type ="text" id = "id">
-        <br>City <input type ="text" id = "city">
-        <br>State <input type ="text" id = "state">
-        <br>Country <input type ="text" id = "country">
-        <br><button onclick="submit()">Submit</button>
+        <button onclick="submit()">Submit</button>
     </div>
 </body>
 
 <script>
-function submit() {
-    var id = document.getElementById("id").value;
-    var city = document.getElementById("city").value;
-    var state = document.getElementById("state").value;
-    var country = document.getElementById("country").value;
-    document.getElementById("lgnBtn").textContent = id + city + state + country;
-    document.getElementById("lgnBtn").style.color = "white";
-    document.getElementById("lgnBtn").style.padding = "14px";
-}
+    function submit() {
+        var id = document.getElementById("id").value;
+        var city = document.getElementById("city").value;
+        var state = document.getElementById("state").value;
+        var country = document.getElementById("country").value;
+        document.getElementById("lgnBtn").textContent = id + city + state + country;
+        document.getElementById("lgnBtn").style.color = "white";
+        document.getElementById("lgnBtn").style.padding = "14px";
+    }
 </script>

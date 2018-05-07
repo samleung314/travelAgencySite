@@ -1,33 +1,40 @@
 <head>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-      {{#if message}}
-        {{message}}
-        <form action="/" method="get">
-          <input type="submit" value="Back to home page"><br>
-        </form>
-      {{else}}
-        {{#if rooms}}
-          <h4>{{rooms.length}} available {{atype}} rooms found in {{city}} with your selected amenities:</h4>
-            <form action="/database/bookroom" method="post">
-              <table align="center">
-                {{#each rooms}}
-                  <tr>
-                    <td align="right">{{this.Address}}, Room {{this.RoomNumber}}: ${{this.Rate}}/night.</td>
-                    <td align="left"><input type ="checkbox" name= value={{this.Room}}>Book room</td>
-                  </tr>
-                {{/each}}
-              </table>
-            </form>
-        {{else}}
-          No rooms available.<br>
-        {{/if}}
-        <form action="/accommodation.hbs" method="get">
-          <input type="submit" value="Back to accommodation search"><br>
-        </form>
-      {{/if}}
-    </div>
+  <div class="center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+    {{#if message}} {{message}}
+    <form action="/" method="get">
+      <input type="submit" value="Back to home page">
+      <br>
+    </form>
+    {{else}} {{#if rooms}}
+    <h4>{{rooms.length}} available {{atype}} rooms found in {{city}} with your selected amenities:</h4>
+    <form action="/database/bookroom" method="post">
+      <table align="center">
+        {{#each rooms}}
+        <tr>
+          <td align="right">{{this.Address}}, Room {{this.RoomNumber}}: ${{this.Rate}}/night.</td>
+          <td align="left">
+            <input type="checkbox" name=v alue={{this.Room}}>Book room</td>
+        </tr>
+        {{/each}}
+      </table>
+    </form>
+    {{else}} No rooms available.
+    <br> {{/if}}
+    <form action="/accommodation.hbs" method="get">
+      <input type="submit" value="Back to accommodation search">
+      <br>
+    </form>
+    {{/if}}
+  </div>
 </body>
