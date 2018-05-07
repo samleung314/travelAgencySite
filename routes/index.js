@@ -93,4 +93,12 @@ router.get('/foundflights.hbs', function(req, res, next) {
   res.render('foundflights', { title: 'My Travel Agency', logged: logValue });
 });
 
+router.get('/postedreviews.hbs', function(req, res, next) {
+    var sql = "SELECT Rating, DetailedReview, fName FROM Reviews INNER JOIN Passenger ON Reviews.GroupID=Passenger.groupID AND Passenger.pass IS NOT NULL";
+    database.con.query(sql, function (err, result) {
+        console.log(result);
+        res.render('postedreviews', { title: 'My Travel Agency', logged: logValue, reviews: result });
+    });
+});
+
 module.exports = router;
