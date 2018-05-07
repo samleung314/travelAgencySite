@@ -113,10 +113,10 @@ router.post('/accommodation', function(req, res, next) {
     }else{
       amen = "1 = 1";
     }
-    var sql = "SELECT Address, CityName, RoomNumber, Rate FROM Accommodation INNER JOIN (SELECT ID AS hotel FROM Amenities WHERE " + amen + ") AS T1 ON Accommodation.ID = hotel INNER JOIN (SELECT * FROM Room) AS T2 ON HotelID = Accommodation.ID INNER JOIN (SELECT CityID, City AS CityName FROM Location) AS T3 ON City = CityID WHERE AType = '" + p.type + "' AND CityName = '" + p.city + "' ORDER BY Address ASC";
+    var sql = "SELECT Address, RoomNumber, Rate FROM Accommodation INNER JOIN (SELECT ID AS hotel FROM Amenities WHERE " + amen + ") AS T1 ON Accommodation.ID = hotel INNER JOIN (SELECT * FROM Room) AS T2 ON HotelID = Accommodation.ID INNER JOIN (SELECT CityID, City AS CityName FROM Location) AS T3 ON City = CityID WHERE AType = '" + p.type + "' AND CityName = '" + p.city + "' ORDER BY Address ASC";
+    console.log(sql);
     con.query(sql, function (err, result) {
-      console.log(result);
-      // res.render('foundrooms', {title: 'My Travel Agency', rooms: result, city});
+      res.render('foundrooms', {title: 'My Travel Agency', rooms: result, city: p.city, atype: p.type, gym: p.gym, lounge: p.lounge, pool: p.pool});
     });
 });
 
@@ -135,6 +135,15 @@ router.post('/bookcruise', function(req, res, next) {
     console.log(p.ticketsBooked + " tickets booked on cruise " + p.book);
     con.query(sql, function (err, result) {
       res.render('foundcruises', {title: 'My Travel Agency', message: "Your cruise has been booked!"});
+    });
+});
+
+router.post('/bookroom', function(req, res, next) {
+    var p= req.body;
+    var sql = "";
+    console.log(p);
+    con.query(sql, function (err, result) {
+      //res.render('foundrooms', {title: 'My Travel Agency', message: "Your rooms has been booked!"});
     });
 });
 
