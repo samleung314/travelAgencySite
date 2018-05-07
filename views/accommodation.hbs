@@ -3,20 +3,36 @@
 </head>
 <body>
     <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-        City <input type ="text" id = "city">
-        <br>Number of rooms <input type ="text" id = "num">
-        <br>Accommodation type <select id="type">
-        <option value="hotel">Hotel</option>
-        <option value="motel">Motel</option>
-        </select>
-        <br>Facilities: &emsp;
-        <input type="checkbox" name="lounge" value="lounge">Lounge &ensp;
-        <input type="checkbox" name="gym" value="gym">Gym &ensp;
-        <input type="checkbox" name="pool" value="pool">Pool &ensp;
-        <br>Check-in date <input type ="text" id = "indate">
-        <br>Check-out date <input type ="text" id = "outdate">
-        <br>
-        <button onclick="submit()">Submit</button>
+      <form action = "/database/accommodation" method = "post">
+          <table align="center">
+            <tr>
+            <td align="right">Check-in date (MM/DD/YYYY)</td>
+            <td align="left"><input type="text" name="date" /></td>
+            </tr>
+            <tr>
+            <td align="right">Accommodation type</td>
+            <td align="left"><select id ="type" name="type">
+            <option value="hotel">Hotel</option>
+            <option value="motel">Motel</option>
+            </select></td>
+            </tr>
+            <tr>
+            <td align="right">City</td>
+            <td align="left"><input type="text" id="city" /></td>
+            </tr>
+            <tr>
+            <td align="right">Number of rooms</td>
+            <td align="left"><input type="text" name="num" /></td>
+            </tr>
+            <tr>
+            <td align="right">Desired amenities:</td>
+            <td align="left">
+            <input type="checkbox" name="lounge" value="1">Lounge&ensp;
+            <input type="checkbox" name="gym" value="1">Gym&ensp;
+            <input type="checkbox" name="pool" value="1">Pool</td>
+            </tr>
+          </table>
+          <input type="submit" value="Search for accommodation">
+      </form>
     </div>
-
 </body>
