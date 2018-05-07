@@ -17,9 +17,10 @@
                 {{#each rooms}}
                   <tr>
                     <td align="right">{{this.Address}}, Room {{this.RoomNumber}}: ${{this.Rate}}/night.</td>
-                    <td align="left"><input type ="checkbox" name= value={{this.Room}}>Book room</td>
+                    <td align="left"><button name= "book" type="submit" value={{this.RoomNumber}}{{this.ID}}>Book room</button>
                   </tr>
                 {{/each}}
+                <input type="hidden" name="date" value={{checkin}}>
               </table>
             </form>
         {{else}}
