@@ -10,31 +10,32 @@
 </head>
 
 <body>
-  <div class="center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-    {{#if message}} {{message}}
-    <form action="/" method="get">
-      <input type="submit" value="Back to home page">
-      <br>
-    </form>
-    {{else}} {{#if rooms}}
-    <h4>{{rooms.length}} available {{atype}} rooms found in {{city}} with your selected amenities:</h4>
-    <form action="/database/bookroom" method="post">
-      <table align="center">
-        {{#each rooms}}
-        <tr>
-          <td align="right">{{this.Address}}, Room {{this.RoomNumber}}: ${{this.Rate}}/night.</td>
-          <td align="left">
-            <input type="checkbox" name=v alue={{this.Room}}>Book room</td>
-        </tr>
-        {{/each}}
-      </table>
-    </form>
-    {{else}} No rooms available.
-    <br> {{/if}}
-    <form action="/accommodation.hbs" method="get">
-      <input type="submit" value="Back to accommodation search">
-      <br>
-    </form>
-    {{/if}}
-  </div>
+    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
+      {{#if message}}
+        {{message}}
+        <form action="/" method="get">
+          <input type="submit" value="Back to home page"><br>
+        </form>
+      {{else}}
+        {{#if rooms}}
+          <h4>{{rooms.length}} available {{atype}} rooms found in {{city}} with your selected amenities:</h4>
+            <form action="/database/bookroom" method="post">
+              <table align="center">
+                {{#each rooms}}
+                  <tr>
+                    <td align="right">{{this.Address}}, Room {{this.RoomNumber}}: ${{this.Rate}}/night.</td>
+                    <td align="left"><button name= "book" type="submit" value={{this.RoomNumber}}{{this.ID}}>Book room</button>
+                  </tr>
+                {{/each}}
+                <input type="hidden" name="date" value={{checkin}}>
+              </table>
+            </form>
+        {{else}}
+          No rooms available.<br>
+        {{/if}}
+        <form action="/accommodation.hbs" method="get">
+          <input type="submit" value="Back to accommodation search"><br>
+        </form>
+      {{/if}}
+    </div>
 </body>
