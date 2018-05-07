@@ -56,6 +56,9 @@ router.post('/login', function(req, res, next) {
   var p= req.body;
   var sql = "SELECT pass,fName FROM TravelAgency.Passenger WHERE email = '"+p.email +"'";
   con.query(sql, function (err, result) {
+    if(result[0].pass == null){
+        res.render('login', { title: 'My Travel Agency', logged: "Login",message: 'Invalid Credentials', layout: "nonuser"});  
+    }
     if(result.length == 1 && result[0].pass == p.pass){
       res.cookie('name',result[0].fName);
       res.cookie('email',p.email);
@@ -148,7 +151,38 @@ router.post('/bookroom', function(req, res, next) {
 });
 
 router.post('/addPassenger', function(req, res, next) {
+    var p = req.body;
+    var n1 = p.fName;
+    var n2 = p.lName;
+    var n3 = p.age;
+    var n4 = p.email;
+    
+    var entity = [];
+    entity.push(p.email);
+    entity.push(null);
+    entity.push(p.fname);
+    entity.push(p.lname);
+    if(Number.isInteger(p.age)){
+        entity.push(p.age);
+    }else{
+        entity.push(null);
+    }
+    entity.push(p.gender);
+    entity.push(null);
+    var values = [entity];
+    var sql = "INSERT INTO Passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
 
+    con.query(sql,[values],function (err, result) {
+        if(err){
+            console.log("ERROR")
+            console.log(err);
+            res.redirect('/')
+        }else{
+            console.log(result);
+            res.redirect('/')
+        }
+    });
+    
 });
 
 router.post('/updateGroup', function(req, res, next) {

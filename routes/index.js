@@ -18,7 +18,7 @@ function setLogged(req){
 router.get('/', function(req, res, next) {
   setLogged(req);
   if(!loggedIn){ //if you are logged out
-    res.render('homepage', {title: "Travel Agency", logged: logValue, message: "new user. Please Login!", layout: "nonuser"})
+    res.render('login', {title: "Travel Agency", logged: logValue, message: "Welcome new user. Please Login!", layout: "nonuser"})
   }else{
     res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
   }
