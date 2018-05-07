@@ -29,8 +29,8 @@ app.use('/database', databaseRouter.router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.render('login', { title: 'My Travel Agency' });
-  //next(createError(404));
+  //res.render('login', { title: 'My Travel Agency' });
+  next(createError(404));
 });
 
 // error handler

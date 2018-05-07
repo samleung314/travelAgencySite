@@ -182,15 +182,21 @@
             </tbody>
         </table>
 
-        <form>
+        <form action="/database/addPassenger" method = "post">
             <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="First Name">
+                <input type="text" class="form-control" name = "fName" id="exampleInputEmail1" placeholder="First Name">
                 <br>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Last Name">
+                <input type="text" class="form-control" name = "lName" id="exampleInputEmail1" placeholder="Last Name">
                 <br>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Age">
+                <input type="text" class="form-control" name = "age" id="exampleInputEmail1" placeholder="Age">
                 <br>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <input type="email" class="form-control" name = "email" id="exampleInputEmail1" placeholder="Email">
+                <br>
+                <select class="form-control" name="gender">
+                    <option>male</option>
+                    <option>female</option>
+                </select>
+                <br>
             </div>
             <button type="submit" class="btn btn-primary">Add Passenger</button>
             <a href="/accommodation.hbs" class="btn btn-primary">Go to Accomodations</a>
