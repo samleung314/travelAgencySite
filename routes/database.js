@@ -116,12 +116,12 @@ router.post('/accommodation', function(req, res, next) {
   }else{
     amen = "1 = 1";
   }
-  var sql = "SELECT ID, Address, RoomNumber, Rate FROM Accommodation INNER JOIN (SELECT ID AS hotel FROM Amenities WHERE " + amen + ") AS T1 ON Accommodation.ID = hotel INNER JOIN (SELECT * FROM Room) AS T2 ON HotelID = Accommodation.ID INNER JOIN (SELECT CityID, City AS CityName FROM Location) AS T3 ON City = CityID WHERE AType = '" + p.type + "' AND CityName = '" + p.city + "' ORDER BY Address ASC";
+  var sql = "SELECT ID, Address, RoomNumber, Rate FROM Accommodation INNER JOIN (SELECT ID AS hotel FROM Amenities WHERE " + amen + ") AS T1 ON Accommodation.ID = hotel INNER JOIN (SELECT * FROM Room WHERE OccupiedFrom IS NULL) AS T2 ON HotelID = Accommodation.ID INNER JOIN (SELECT CityID, City AS CityName FROM Location) AS T3 ON City = CityID WHERE AType = '" + p.type + "' AND CityName = '" + p.city + "' ORDER BY Address ASC";
   var year = p.date.substr(0,4);
   var day = p.date.substr(5,2);
-  var month = p.date.substr(8,2);
+  var month = p.date.substr(8);
   if(!(/^\d+$/.test(year) && /^\d+$/.test(day) && /^\d+$/.test(month))){
-      p.date = "2000-01-01"; //default date
+      p.date = "1999-12-31"; //default date
   }
   con.query(sql, function (err, result) {
     res.render('foundrooms', {title: 'My Travel Agency', rooms: result, city: p.city, atype: p.type, gym: p.gym, lounge: p.lounge, pool: p.pool, checkin: p.date});
