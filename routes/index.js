@@ -14,18 +14,15 @@ function setLogged(req){
   }
 }
 
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   setLogged(req);
   if(!loggedIn){ //if you are logged out
     res.render('homepage', {title: "Travel Agency", logged: logValue, message: "new user. Please Login!", layout: "nonuser"})
   }else{
-    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.email})
+    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
   }
 });
-
 
 router.get('/login.hbs', function(req, res, next) {
   if(!loggedIn){
