@@ -138,6 +138,14 @@ router.post('/bookcruise', function(req, res, next) {
     });
 });
 
+router.post('/addPassenger', function(req, res, next) {
+    
+});
+
+router.post('/updateGroup', function(req, res, next) {
+    
+});
+
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected to public database!");

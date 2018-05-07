@@ -1,25 +1,33 @@
 <head>
 </head>
+
 <body>
-    <div class = "center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2;">
+    <div class="center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2;">
         {{message}}
-        <form action = "/database/register" method = "post">
+        <form action="/database/register" method="post">
             <table align="center">
                 <tr>
                     <td align="right">Email</td>
-                    <td align="left"> <input type="text" name = "email" value=""> </td>
+                    <td align="left">
+                        <input type="text" name="email" value=""> </td>
                 </tr>
                 <tr>
                     <td align="right">First Name</td>
-                    <td align="left"><input type="text" name = "fname" value=""><br></td>
+                    <td align="left">
+                        <input type="text" name="fname" value="">
+                        <br>
+                    </td>
                 </tr>
                 <tr>
                     <td align="right">Last Name</td>
-                    <td align="left"> <input type="text" name = "lname" value=""></td>
+                    <td align="left">
+                        <input type="text" name="lname" value="">
+                    </td>
                 </tr>
                 <tr>
                     <td align="right">Age</td>
-                    <td align="left"> <input type="text" name = "age" value=""> </td>
+                    <td align="left">
+                        <input type="text" name="age" value=""> </td>
                 </tr>
                 <tr>
                     <td align="right">Gender</td>
@@ -27,12 +35,14 @@
                         <select id="gender" name="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-                        </select><br>
+                        </select>
+                        <br>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">Password</td>
-                    <td align="left"> <input type="password" id="pass" name = "pass" value=""> </td>
+                    <td align="left">
+                        <input type="password" id="pass" name="pass" value=""> </td>
                 </tr>
                 <tr>
                     <td align="right">Usage</td>
@@ -40,7 +50,8 @@
                         <select id="usage" name="usage">
                             <option value="passenger">Passenger</option>
                             <option value="admin">Employee</option>
-                        </select><br>
+                        </select>
+                        <br>
                     </td>
                 </tr>
             </table>
