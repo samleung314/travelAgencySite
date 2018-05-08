@@ -98,11 +98,7 @@ router.post('/login', function (req, res, next) {
     if(err){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
     }
-<<<<<<< HEAD
     //if correct credentials used, save cookies to keep him logged in
-=======
-
->>>>>>> 2d517dcd2f21255f51fdc7dc1a1bcc9443320f85
     if (result.length == 1 && result[0].pass == p.pass) {
       res.cookie('groupID', result[0].groupID);
       res.cookie('passengerID', result[0].passengerID);
