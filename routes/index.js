@@ -20,13 +20,23 @@ router.get('/', function(req, res, next) {
   if(!loggedIn){ //if you are logged out
     res.render('login', {title: "Travel Agency", logged: logValue, message: "Welcome new user. Please Login!", layout: "nonuser"})
   }else{
-    res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
     //FIND THE GROUP
     var sql = "SELECT * FROM TravelAgency.Passenger WHERE groupID = '" + req.cookies.groupID + "'";
     database.con.query(sql, function (err, result) {
       if(err) next()
       else{
-        console.log(result);
+        var list = []
+        for(var i = 0; i < result.length; i++){
+          var p1 = result[i].email;
+          var p2 = result[i].fName;
+          var p3 = result[i].lName;
+          var p4 = result[i].age;
+          var person = { email: p1, fname: p2, lname: p3, age: p4 };
+          list.push(person);
+        }
+        
+        var context = {languages: list, logged: logValue};
+        res.render('homepage', context);
       }
     });
 
