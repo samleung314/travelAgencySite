@@ -153,36 +153,18 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each languages}}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>10</td>
-                    <td>mark@mark.com</td>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{fname}}</td>
+                    <td>{{lname}}</td>
+                    <td>{{age}}</td>
+                    <td>{{email}}</td>
                     <td>
                         <button class="editbtn">X</button>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>11</td>
-                    <td>jacob@jacob.com</td>
-                    <td>
-                        <button class="editbtn">X</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>12</td>
-                    <td>larry@larry.com</td>
-                    <td>
-                        <button class="editbtn">X</button>
-                    </td>
-                </tr>
+                {{/each}}
             </tbody>
         </table>
 
