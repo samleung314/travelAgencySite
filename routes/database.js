@@ -181,13 +181,9 @@ router.post('/addPassenger', function (req, res, next) {
   var entity = [];
   entity.push(p.email);
   entity.push(req.cookies.groupID);
-  entity.push(p.fname);
-  entity.push(p.lname);
-  if (Number.isInteger(p.age)) {
-    entity.push(p.age);
-  } else {
-    entity.push(null);
-  }
+  entity.push(p.fName);
+  entity.push(p.lName);
+  entity.push(p.age);
   entity.push(p.gender);
   entity.push(null);
   var values = [entity];
