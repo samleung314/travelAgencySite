@@ -34,6 +34,8 @@ router.get('/login.hbs', function(req, res, next) {
     //logout
     res.cookie('name', "")
     res.cookie('email', "")
+    res.cookie('passengerID', "")
+    res.cookie('groupID', "")
     res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser"});
   }
 });
