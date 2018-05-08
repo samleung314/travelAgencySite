@@ -114,6 +114,7 @@ router.post('/review', function(req, res, next) {
   var p= req.body;
   var email = req.cookies.email;
   var sql = "INSERT INTO Reviews(Rating, DetailedReview, GroupID) VALUES ('" + p.rating + "', '" + p.review + "', (SELECT groupID FROM Passenger WHERE email = '" + email + "')) ON DUPLICATE KEY UPDATE Rating = '" + p.rating + "', DetailedReview = '" + p.review + "'";
+  console.log(sql);
   con.query(sql, function (err, result) {
     res.render('reviews', {title: 'My Travel Agency', message: "Your review has been submitted!"});
   });
@@ -187,13 +188,9 @@ router.post('/addPassenger', function (req, res, next) {
   var entity = [];
   entity.push(p.email);
   entity.push(req.cookies.groupID);
-  entity.push(p.fname);
-  entity.push(p.lname);
-  if (Number.isInteger(p.age)) {
-    entity.push(p.age);
-  } else {
-    entity.push(null);
-  }
+  entity.push(p.fName);
+  entity.push(p.lName);
+  entity.push(p.age);
   entity.push(p.gender);
   entity.push(null);
   var values = [entity];

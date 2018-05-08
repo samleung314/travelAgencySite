@@ -22,8 +22,8 @@ table, th, td {
         {{#each reviews}}
         <table align="center" style="background-color: rgb(110,140,205)">
           <tr>
-          <td align="left" style="min-width:100px">{{this.fName}} wrote:<br>{{this.Rating}}/5 stars</td>
-          <td align="left" style="min-width:800px">&ensp;"{{this.DetailedReview}}"</td>
+          <td align="left" style="min-width:100px;max-width:100px">{{this.fName}} wrote:<br>{{this.Rating}}/5 stars</td>
+          <td align="left" style="min-width:800px;max-width:800px">&ensp;"{{this.DetailedReview}}"</td>
           </tr>
       </table>
         {{/each}}
