@@ -2,20 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-function getLevel(req) {
-  var sql = "INSERT INTO Passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
-
-  con.query(sql, [values], function (err, result) {
-    if (err) {
-      res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
-    } else {
-      res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
-    }
-
-  });
-}
-
-//Database
+//Database connection
 var con = mysql.createConnection({
   host: "54.165.71.152",
   user: "admin",
@@ -23,14 +10,16 @@ var con = mysql.createConnection({
   database: "TravelAgency",
 });
 
-/* GET home page. */
+/* When user registers into the database*/
 router.post('/register', function (req, res, next) {
+  //create a new group for each user (it auto increments)
   var sql = "INSERT INTO PGroup(GroupID, SourceLocation, DestinationLocation, TransportType, Purpose) VALUES (0,null,null,null,null)";
   var groupID = 0;
   con.query(sql, function (err, result) {
     if (err) {
       res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
     } else {
+      //add all user info into the Passenger table
       var p = req.body;
       var entity = [];
       entity.push(p.email);
@@ -47,6 +36,7 @@ router.post('/register', function (req, res, next) {
         if (err) {
           res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
         } else {
+          //if everything works fine, send user to login page
           res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
         }
       });
@@ -57,6 +47,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.post('/updateGroup', function(req,res,next){
+  //When the user clicks the update button, sends the group info and saves it into the database
   console.log();
   var src = req.body.type[0];
   var dest = req.body.type[1];
@@ -73,7 +64,7 @@ router.post('/updateGroup', function(req,res,next){
   con.query(sql, [values],function (err, result) {
     if(err){
       console.log(err);
-      res.redirect(404);
+      res.redirect(createError(404));
     }else{
       res.redirect('/');
     }
@@ -81,6 +72,7 @@ router.post('/updateGroup', function(req,res,next){
 });
 
 router.post('/delete', function (req, res, next) {
+  //lets the user delete from the passengers listed in the group
   var sql = "DELETE FROM TravelAgency.Passenger WHERE email = '" + req.body.value + "'";
   con.query(sql, function (err, result) {
     if(err){
@@ -93,10 +85,12 @@ router.post('/delete', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
+  //takes the user input (email and password) and checks it against the sql database
   var p = req.body;
   var sql = "SELECT * FROM TravelAgency.Passenger WHERE email = '" + p.email + "'";
   console.log(p.pass);
   con.query(sql, function (err, result) {
+    //if no results found, say invalid credentials
     if(result.length == 0){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
       return;
@@ -104,7 +98,7 @@ router.post('/login', function (req, res, next) {
     if(err){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
     }
-    
+    //if correct credentials used, save cookies to keep him logged in
     if (result.length == 1 && result[0].pass == p.pass) {
       res.cookie('groupID', result[0].groupID);
       res.cookie('passengerID', result[0].passengerID);
@@ -217,6 +211,7 @@ router.post('/bookroom', function (req, res, next) {
 });
 
 router.post('/addPassenger', function (req, res, next) {
+  //adds passenger to a group given by the user logged in (from a cookie)
   var p = req.body;
   var n1 = p.fName;
   var n2 = p.lName;
@@ -247,10 +242,6 @@ router.post('/addPassenger', function (req, res, next) {
 
 });
 
-router.post('/updateGroup', function (req, res, next) {
-
-});
-
 router.post('/payment', function(req, res, next) {
   var values = [];
   values.push(req.body.payment);
@@ -269,6 +260,7 @@ router.post('/payment', function(req, res, next) {
 });
 
 con.connect(function(err) {
+  //connects to the database
   if (err) throw err;
   console.log("Connected to public database!");
 });

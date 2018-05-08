@@ -5,6 +5,7 @@ var database = require('./database');
 logValue = "Login";
 loggedIn = false;
 function setLogged(req){
+  //Keeps track of whether user is logged in or out
   if(req.cookies.name == "" && req.cookies.email == ""){
     logValue = "Login"
     loggedIn = false;
@@ -25,6 +26,7 @@ router.get('/', function(req, res, next) {
     database.con.query(sql, function (err, result) {
       if(err) next()
       else{
+        //if group is found, list all passengers with same group in table
         var list = []
         for(var i = 0; i < result.length; i++){
           var p1 = result[i].email;
@@ -59,6 +61,7 @@ router.get('/login.hbs', function(req, res, next) {
   }
 });
 
+//Rest is all routing
 router.get('/register.hbs', function(req, res, next) {
   setLogged(req);
   res.render('register', { title: 'Register', logged: logValue, layout: "nonuser" });
