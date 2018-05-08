@@ -15,6 +15,7 @@
             <b> Welcome {{message}}! Create your group!</b>
         </font>
         <br>
+        <form action = "/database/updateGroup" method="post">
         <div class="dropdown">
             <select id="type" name="type" class="btn btn-secondary dropdown-toggle">
                 <option value="" disabled selected>Source</option>
@@ -136,10 +137,12 @@
                 <option value="" disabled selected>Transport</option>
                 <option value="Cruise">Cruise</option>
                 <option value="Flight">Flight</option>
+                <option value="CarRental">CarRental</option>
             </select>
 
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
+        </form>
         <br>
         <table class="table table-striped table-light">
             <thead>
@@ -155,14 +158,16 @@
             <tbody>
                 {{#each languages}}
                 <tr>
+                    <form action = "database/delete/" method = "post">
                     <th scope="row">{{@index}}</th>
                     <td>{{fname}}</td>
                     <td>{{lname}}</td>
                     <td>{{age}}</td>
                     <td>{{email}}</td>
-                    <td>
-                        <button class="editbtn">X</button>
-                    </td>
+                    <td><button type="submit" name="value" value="{{email}}" class="editbtn">X</button></td>
+                    </form>
+                        
+                    
                 </tr>
                 {{/each}}
             </tbody>

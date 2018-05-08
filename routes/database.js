@@ -56,6 +56,42 @@ router.post('/register', function (req, res, next) {
 
 });
 
+router.post('/updateGroup', function(req,res,next){
+  console.log();
+  var src = req.body.type[0];
+  var dest = req.body.type[1];
+  var purp = req.body.type[2];
+  var trans = req.body.type[3];
+  var entity = [];
+  entity.push(0);
+  entity.push(src);
+  entity.push(dest);
+  entity.push(purp);
+  entity.push(trans);
+  var values = [entity];
+  var sql = "INSERT INTO TravelAgency.PGroup (GroupID,SourceLocation,DestinationLocation,TransportType,Purpose) VALUES ?";
+  con.query(sql, [values],function (err, result) {
+    if(err){
+      console.log(err);
+      res.redirect(404);
+    }else{
+      res.redirect('/');
+    }
+  });
+});
+
+router.post('/delete', function (req, res, next) {
+  var sql = "DELETE FROM TravelAgency.Passenger WHERE email = '" + req.body.value + "'";
+  con.query(sql, function (err, result) {
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result);
+      res.redirect('/');
+    }
+  });
+});
+
 router.post('/login', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT * FROM TravelAgency.Passenger WHERE email = '" + p.email + "'";
@@ -109,6 +145,8 @@ router.post('/cruise', function (req, res, next) {
     res.render('foundcruises', { title: 'My Travel Agency', cruises: result, depart: p.departure, arrive: p.destination, num: p.num });
   });
 });
+
+
 
 router.post('/review', function(req, res, next) {
   var p= req.body;
