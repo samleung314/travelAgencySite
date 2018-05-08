@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
           var person = { email: p1, fname: p2, lname: p3, age: p4 };
           list.push(person);
         }
-        
+
         var context = {languages: list, logged: logValue};
         res.render('homepage', context);
       }
@@ -82,11 +82,6 @@ router.get('/group.hbs', function(req, res, next) {
 router.get('/flight.hbs', function(req, res, next) {
   setLogged(req);
   res.render('flight', { title: 'My Travel Agency', logged: logValue });
-});
-
-router.get('/carrental.hbs', function(req, res, next) {
-  setLogged(req);
-  res.render('carrental', { title: 'My Travel Agency', logged: logValue });
 });
 
 router.get('/cruise.hbs', function(req, res, next) {

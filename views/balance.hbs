@@ -36,11 +36,27 @@
                         <input type="date" id="expiry" name='expiryDate'>
                     </td>
                 </tr>
-                
+
             </table>
-            <input type="submit" value="Pay Now"> 
+            <input type="submit" value="Pay Now">
             <br>{{{success}}}
         </form>
+
+        <table align="center" class="table table-striped table-light">
+            <thead>
+                <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Card Number</th>
+                    <th scope="col">Expiry Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>{{payment}}</td>
+                <td>{{cardnum}}</td>
+                <td>{{expiryDate}}</td>
+            </tbody>
+        </table>
+
     </div>
 
 </body>
