@@ -223,8 +223,10 @@ router.post('/payment', function(req, res, next) {
   var sql = "INSERT INTO Payment (PaymentType, CardNumber, CardExpiryDate) VALUES ?"
   con.query(sql, [valuesA], function (err, result) {
     if(err) console.log(err.sqlMessage)
-    res.render('balance', { title: 'My Travel Agency', success: 'Payment Success!'});
+    res.render('balance', { title: 'My Travel Agency', success: 'Payment Success!', payment: req.body.payment, cardnum: req.body.cardnum, expiryDate: req.body.expiryDate});
   });
+
+
 
 });
 
