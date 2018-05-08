@@ -104,7 +104,7 @@ router.post('/login', function (req, res, next) {
     if(err){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
     }
-    
+
     if (result.length == 1 && result[0].pass == p.pass) {
       res.cookie('groupID', result[0].groupID);
       res.cookie('passengerID', result[0].passengerID);
@@ -118,6 +118,7 @@ router.post('/login', function (req, res, next) {
   });
 });
 
+//Find all flights in a month from one city to another, with at least the specified number of seats in the chosen class.
 router.post('/flight', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT Carrier, FlightNumber, Departure, Fare FROM Flight INNER JOIN (SELECT CityID AS depart, City AS A FROM Location WHERE City = '" + p.departure + "') AS T1 ON src = depart INNER JOIN (SELECT CityID AS arrive, City AS B FROM Location WHERE City = '" + p.destination + "') AS T2 ON dst = arrive WHERE MONTH(Departure) = " + p.date + " AND Section = '" + p.section + "' AND Availability >= " + p.num + " ORDER BY Departure ASC";
@@ -132,6 +133,7 @@ router.post('/flight', function (req, res, next) {
   });
 });
 
+//Find all cruises in a month from one city to another with at least the specified number of cabins.
 router.post('/cruise', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT Carrier, CruiseNumber, Departure, Fare FROM Cruise INNER JOIN (SELECT CityID AS depart, City AS A FROM Location WHERE City = '" + p.departure + "') AS T1 ON src = depart INNER JOIN (SELECT CityID AS arrive, City AS B FROM Location WHERE City = '" + p.destination + "') AS T2 ON dst = arrive WHERE MONTH(Departure) = " + p.date + " AND Availability >= " + p.num + " ORDER BY Departure ASC";
@@ -146,8 +148,7 @@ router.post('/cruise', function (req, res, next) {
   });
 });
 
-
-
+//Submit a review into the database, labeled with the logged-in user that wrote it along with a rating out of 5 and a detailed, written part.
 router.post('/review', function(req, res, next) {
   var p= req.body;
   var email = req.cookies.email;
@@ -158,6 +159,7 @@ router.post('/review', function(req, res, next) {
   });
 });
 
+//Find all available rooms in a city in buildings that contain at least the requested amenities.
 router.post('/accommodation', function(req, res, next) {
   var p = req.body;
   var amen = [];
@@ -188,6 +190,7 @@ router.post('/accommodation', function(req, res, next) {
   });
 });
 
+//Books the specified number of seats on a flight and reduces availability from the database accordingly.
 router.post('/bookflight', function (req, res, next) {
   var p = req.body;
   var sql = "UPDATE Flight SET Availability = Availability - " + p.ticketsBooked + " WHERE FlightNumber = '" + p.book + "' AND Section = '" + p.section + "'";
@@ -197,6 +200,7 @@ router.post('/bookflight', function (req, res, next) {
   });
 });
 
+//Books the specified number of seats on a cruise and reduces availability from the database accordingly.
 router.post('/bookcruise', function (req, res, next) {
   var p = req.body;
   var sql = "UPDATE Cruise SET Availability = Availability - " + p.ticketsBooked + " WHERE CruiseNumber = '" + p.book + "'";
@@ -206,6 +210,7 @@ router.post('/bookcruise', function (req, res, next) {
   });
 });
 
+//Books the specified room and marks it as occupied.
 router.post('/bookroom', function (req, res, next) {
   var p = req.body;
   var room = p.book.substr(0, 3);
