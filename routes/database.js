@@ -2,20 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-function getLevel(req) {
-  var sql = "INSERT INTO Passenger (email, groupID, fName, lName, age, gender,pass) VALUES ?";
-
-  con.query(sql, [values], function (err, result) {
-    if (err) {
-      res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
-    } else {
-      res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
-    }
-
-  });
-}
-
-//Database
+//Database connection
 var con = mysql.createConnection({
   host: "54.165.71.152",
   user: "admin",
@@ -23,14 +10,16 @@ var con = mysql.createConnection({
   database: "TravelAgency",
 });
 
-/* GET home page. */
+/* When user registers into the database*/
 router.post('/register', function (req, res, next) {
+  //create a new group for each user (it auto increments)
   var sql = "INSERT INTO PGroup(GroupID, SourceLocation, DestinationLocation, TransportType, Purpose) VALUES (0,null,null,null,null)";
   var groupID = 0;
   con.query(sql, function (err, result) {
     if (err) {
       res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
     } else {
+      //add all user info into the Passenger table
       var p = req.body;
       var entity = [];
       entity.push(p.email);
@@ -47,6 +36,7 @@ router.post('/register', function (req, res, next) {
         if (err) {
           res.render('register', { title: 'My Travel Agency', logged: "Login", message: err.sqlMessage, layout: "nonuser" });
         } else {
+          //if everything works fine, send user to login page
           res.render('login', { title: 'My Travel Agency', logged: "Login", layout: "nonuser" });
         }
       });
@@ -57,6 +47,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.post('/updateGroup', function(req,res,next){
+  //When the user clicks the update button, sends the group info and saves it into the database
   console.log();
   var src = req.body.type[0];
   var dest = req.body.type[1];
@@ -73,7 +64,7 @@ router.post('/updateGroup', function(req,res,next){
   con.query(sql, [values],function (err, result) {
     if(err){
       console.log(err);
-      res.redirect(404);
+      res.redirect(createError(404));
     }else{
       res.redirect('/');
     }
@@ -81,6 +72,7 @@ router.post('/updateGroup', function(req,res,next){
 });
 
 router.post('/delete', function (req, res, next) {
+  //lets the user delete from the passengers listed in the group
   var sql = "DELETE FROM TravelAgency.Passenger WHERE email = '" + req.body.value + "'";
   con.query(sql, function (err, result) {
     if(err){
@@ -93,10 +85,12 @@ router.post('/delete', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
+  //takes the user input (email and password) and checks it against the sql database
   var p = req.body;
   var sql = "SELECT * FROM TravelAgency.Passenger WHERE email = '" + p.email + "'";
   console.log(p.pass);
   con.query(sql, function (err, result) {
+    //if no results found, say invalid credentials
     if(result.length == 0){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
       return;
@@ -104,7 +98,7 @@ router.post('/login', function (req, res, next) {
     if(err){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
     }
-    
+    //if correct credentials used, save cookies to keep him logged in
     if (result.length == 1 && result[0].pass == p.pass) {
       res.cookie('groupID', result[0].groupID);
       res.cookie('passengerID', result[0].passengerID);
@@ -118,6 +112,7 @@ router.post('/login', function (req, res, next) {
   });
 });
 
+//Find all flights in a month from one city to another, with at least the specified number of seats in the chosen class.
 router.post('/flight', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT Carrier, FlightNumber, Departure, Fare FROM Flight INNER JOIN (SELECT CityID AS depart, City AS A FROM Location WHERE City = '" + p.departure + "') AS T1 ON src = depart INNER JOIN (SELECT CityID AS arrive, City AS B FROM Location WHERE City = '" + p.destination + "') AS T2 ON dst = arrive WHERE MONTH(Departure) = " + p.date + " AND Section = '" + p.section + "' AND Availability >= " + p.num + " ORDER BY Departure ASC";
@@ -132,6 +127,7 @@ router.post('/flight', function (req, res, next) {
   });
 });
 
+//Find all cruises in a month from one city to another with at least the specified number of cabins.
 router.post('/cruise', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT Carrier, CruiseNumber, Departure, Fare FROM Cruise INNER JOIN (SELECT CityID AS depart, City AS A FROM Location WHERE City = '" + p.departure + "') AS T1 ON src = depart INNER JOIN (SELECT CityID AS arrive, City AS B FROM Location WHERE City = '" + p.destination + "') AS T2 ON dst = arrive WHERE MONTH(Departure) = " + p.date + " AND Availability >= " + p.num + " ORDER BY Departure ASC";
@@ -146,8 +142,7 @@ router.post('/cruise', function (req, res, next) {
   });
 });
 
-
-
+//Submit a review into the database, labeled with the logged-in user that wrote it along with a rating out of 5 and a detailed, written part.
 router.post('/review', function(req, res, next) {
   var p= req.body;
   var email = req.cookies.email;
@@ -158,6 +153,7 @@ router.post('/review', function(req, res, next) {
   });
 });
 
+//Find all available rooms in a city in buildings that contain at least the requested amenities.
 router.post('/accommodation', function(req, res, next) {
   var p = req.body;
   var amen = [];
@@ -188,6 +184,7 @@ router.post('/accommodation', function(req, res, next) {
   });
 });
 
+//Books the specified number of seats on a flight and reduces availability from the database accordingly.
 router.post('/bookflight', function (req, res, next) {
   var p = req.body;
   var sql = "UPDATE Flight SET Availability = Availability - " + p.ticketsBooked + " WHERE FlightNumber = '" + p.book + "' AND Section = '" + p.section + "'";
@@ -197,6 +194,7 @@ router.post('/bookflight', function (req, res, next) {
   });
 });
 
+//Books the specified number of seats on a cruise and reduces availability from the database accordingly.
 router.post('/bookcruise', function (req, res, next) {
   var p = req.body;
   var sql = "UPDATE Cruise SET Availability = Availability - " + p.ticketsBooked + " WHERE CruiseNumber = '" + p.book + "'";
@@ -206,6 +204,7 @@ router.post('/bookcruise', function (req, res, next) {
   });
 });
 
+//Books the specified room and marks it as occupied.
 router.post('/bookroom', function (req, res, next) {
   var p = req.body;
   var room = p.book.substr(0, 3);
@@ -217,6 +216,7 @@ router.post('/bookroom', function (req, res, next) {
 });
 
 router.post('/addPassenger', function (req, res, next) {
+  //adds passenger to a group given by the user logged in (from a cookie)
   var p = req.body;
   var n1 = p.fName;
   var n2 = p.lName;
@@ -267,6 +267,7 @@ router.post('/payment', function(req, res, next) {
 });
 
 con.connect(function(err) {
+  //connects to the database
   if (err) throw err;
   console.log("Connected to public database!");
 });
