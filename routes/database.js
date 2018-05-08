@@ -59,10 +59,16 @@ router.post('/register', function (req, res, next) {
 router.post('/login', function (req, res, next) {
   var p = req.body;
   var sql = "SELECT * FROM TravelAgency.Passenger WHERE email = '" + p.email + "'";
+  console.log(p.pass);
   con.query(sql, function (err, result) {
-    if(err || result[0].pass == null){
+    if(result.length == 0){
+      res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
+      return;
+    }
+    if(err){
       res.render('login', { title: 'My Travel Agency', logged: "Login", message: 'Invalid Credentials', layout: "nonuser" });
     }
+    
     if (result.length == 1 && result[0].pass == p.pass) {
       res.cookie('groupID', result[0].groupID);
       res.cookie('passengerID', result[0].passengerID);
@@ -182,13 +188,9 @@ router.post('/addPassenger', function (req, res, next) {
   var entity = [];
   entity.push(p.email);
   entity.push(req.cookies.groupID);
-  entity.push(p.fname);
-  entity.push(p.lname);
-  if (Number.isInteger(p.age)) {
-    entity.push(p.age);
-  } else {
-    entity.push(null);
-  }
+  entity.push(p.fName);
+  entity.push(p.lName);
+  entity.push(p.age);
   entity.push(p.gender);
   entity.push(null);
   var values = [entity];
