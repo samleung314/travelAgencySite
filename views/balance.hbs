@@ -11,21 +11,36 @@
 
 <body>
     <div class="center" style="background-color: rgb(94, 123, 184); text-align: center; line-height:2">
-        Payment Type
-        <br>
-        <select id="type">
-            <option value="debit">Debit</option>
-            <option value="credit">Credit</option>
-            <option value="PayPal">PayPal</option>
-        </select>
-        <br>Card Number
-        <br>
-        <input type="text" id="num">
-        <br>Card Expiry Date
-        <br>
-        <input type="text" id="expiry">
-        <br>
-        <button onclick="submit()">Submit</button>
+
+        <form action="/database/payment" method="post">
+            <table align="center">
+                <tr>
+                    <td align="right">Payment Type</td>
+                    <td align="left">
+                        <select id="type" name='payment'>
+                            <option value="debit">Debit</option>
+                            <option value="credit">Credit</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Card Number</td>
+                    <td align="left">
+                        <input type="text" id="num" name='cardnum'>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Card Expiry Date</td>
+                    <td align="left">
+                        <input type="date" id="expiry" name='expiryDate'>
+                    </td>
+                </tr>
+                
+            </table>
+            <input type="submit" value="Pay Now"> 
+            <br>{{{success}}}
+        </form>
     </div>
 
 </body>

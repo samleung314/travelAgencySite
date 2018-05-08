@@ -210,7 +210,22 @@ router.post('/updateGroup', function (req, res, next) {
 
 });
 
-con.connect(function (err) {
+router.post('/payment', function(req, res, next) {
+  var values = [];
+  values.push(req.body.payment);
+  values.push(req.body.cardnum);
+  values.push(req.body.expiryDate);
+
+  var valuesA = [values];
+  var sql = "INSERT INTO Payment (PaymentType, CardNumber, CardExpiryDate) VALUES ?"
+  con.query(sql, [valuesA], function (err, result) {
+    if(err) console.log(err.sqlMessage)
+    res.render('balance', { title: 'My Travel Agency', success: 'Payment Success!'});
+  });
+
+});
+
+con.connect(function(err) {
   if (err) throw err;
   console.log("Connected to public database!");
 });
