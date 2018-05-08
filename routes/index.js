@@ -21,6 +21,15 @@ router.get('/', function(req, res, next) {
     res.render('login', {title: "Travel Agency", logged: logValue, message: "Welcome new user. Please Login!", layout: "nonuser"})
   }else{
     res.render('homepage', {title: "Travel Agency", logged: logValue, message: req.cookies.name})
+    //FIND THE GROUP
+    var sql = "SELECT * FROM TravelAgency.Passenger WHERE groupID = '" + req.cookies.groupID + "'";
+    database.con.query(sql, function (err, result) {
+      if(err) next()
+      else{
+        console.log(result);
+      }
+    });
+
   }
 });
 
