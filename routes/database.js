@@ -247,10 +247,8 @@ router.post('/addPassenger', function (req, res, next) {
 
 });
 
-router.post('/updateGroup', function (req, res, next) {
 
-});
-
+// Adds payment information to database and queries for existing payments
 router.post('/payment', function(req, res, next) {
   var values = [];
   values.push(req.body.payment);
